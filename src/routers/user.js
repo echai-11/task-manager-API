@@ -22,8 +22,11 @@ router.post('/users', async (req,res)=>{
 }) 
 
 //allows user to get profile when authenticated
-router.get('/users/me', auth, async (req,res)=>{
+router.get('users/me', auth, async (req,res)=>{
 	res.send(req.user);
+	if (!user) { 
+		return res.status(404).send('User not authenticated.') 
+	}
 })
 
 //user login to find user by email and pw
